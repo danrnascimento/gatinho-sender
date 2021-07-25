@@ -1,16 +1,23 @@
-import React, { FocusEventHandler, useRef, useState } from "react";
-import { GatinhoSenderFormModule } from "../types";
-import { Selector } from "../../../components/Selector";
-import { Switch } from "../../../components/Switch";
-import { UploadButton } from "../../../components/UploadButton";
+import React, {
+  FocusEventHandler,
+  FormEventHandler,
+  useRef,
+  useState,
+} from "react";
+import { GatinhoSenderFormComponent } from "../types";
+import { Selector } from "../../Selector";
+import { Switch } from "../../Switch";
+import { UploadButton } from "../../UploadButton";
 import { useGatinhoSenderFormManagement } from "../../../hooks";
-import { Button } from "../../../components/Button";
+import { Button } from "../../Button";
 
-export const GatinhoSenderFormTwo: GatinhoSenderFormModule = ({ onSubmit }) => {
+export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
+  onSubmit,
+}) => {
   const [previewSrc, setPreviewSrc] = useState<string>();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { updateImageFile, updateImageUrl, updateNsfw, valid } =
+  const { updateImageFile, updateImageUrl, updateNsfw, valid, values } =
     useGatinhoSenderFormManagement();
 
   const handleAddViaUrl: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -34,8 +41,13 @@ export const GatinhoSenderFormTwo: GatinhoSenderFormModule = ({ onSubmit }) => {
     updateImageFile(file);
   };
 
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    onSubmit({ ...values });
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Cole aqui a URL da imagem de gatinho"
@@ -59,6 +71,6 @@ export const GatinhoSenderFormTwo: GatinhoSenderFormModule = ({ onSubmit }) => {
       <Button type="submit" disabled={valid}>
         Submit
       </Button>
-    </div>
+    </form>
   );
 };

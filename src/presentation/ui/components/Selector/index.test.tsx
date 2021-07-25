@@ -1,9 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Selector, {
+import {
   ALT_IMAGE_WHEN_SRC_EXISTS,
   ALT_IMAGE_WHEN_SRC_NOT_EXISTS,
   LOADING_IMAGE,
+  Selector,
 } from ".";
 
 describe("Component: Selector", () => {

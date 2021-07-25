@@ -1,2 +1,2 @@
-export * from "./ApiHandler";
+export * from "./ApiCommunication";
 export * from "./Validator";

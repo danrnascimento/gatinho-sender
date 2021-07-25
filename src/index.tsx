@@ -1,12 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { LocalStorageAdapter } from "./infra";
+import { LocalStorageCommunicationAdapter } from "./main/adapters";
 import { ValidateImageFile, ValidateUrlString } from "./infra/validators";
 import App from "./main/App";
+import { GatinhoSenderController } from "./presentation/controllers/GatinhoSenderController";
 
 const urlValidator = new ValidateUrlString();
 const fileValidator = new ValidateImageFile();
-const apiHandler = new LocalStorageAdapter();
+const apiHandler = new LocalStorageCommunicationAdapter();
+
+const controller = new GatinhoSenderController(
+  apiHandler,
+  fileValidator,
+  urlValidator
+);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +21,7 @@ ReactDOM.render(
       apiHandler={apiHandler}
       fileValidator={fileValidator}
       urlValidator={urlValidator}
+      controller={controller}
     />
   </React.StrictMode>,
   document.getElementById("root")

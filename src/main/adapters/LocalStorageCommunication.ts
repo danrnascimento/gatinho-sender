@@ -1,6 +1,6 @@
-import { ApiHandler } from "../protocols";
+import { ApiCommunication } from "../../infra/protocols";
 
-export class LocalStorageAdapter implements ApiHandler {
+export class LocalStorageCommunicationAdapter implements ApiCommunication {
   save = async (data: object) => {
     try {
       const dataAsString = JSON.stringify({ data });

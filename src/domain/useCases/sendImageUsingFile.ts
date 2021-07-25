@@ -1,3 +1,3 @@
 export interface SendImageUsingFile {
-  sendImageUsingFile: (file: File, nfsw: string) => boolean;
+  sendImageUsingFile: (file: File, nsfw: boolean) => Promise<boolean>;
 }

@@ -1,3 +1,3 @@
 export interface SendImageUsingUrl {
-  sendImageUsingUrl: (url: string, nfsw: string) => boolean;
+  sendImageUsingUrl: (url: string, nsfw: boolean) => Promise<boolean>;
 }

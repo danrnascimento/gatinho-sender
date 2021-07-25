@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, FC, PropsWithChildren } from "react";
 import { LabelContainer } from "./style";
-import { ReactComponent as UploadIcon } from "../../../resources/icons/upload.svg";
+import { ReactComponent as UploadIcon } from "../../../../resources/icons/upload.svg";
 
 type FileUploadHandler = (params: { url: string; file: File }) => void;
 

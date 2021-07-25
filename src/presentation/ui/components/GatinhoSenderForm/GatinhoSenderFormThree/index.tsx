@@ -1,12 +1,12 @@
 import React, { FormEventHandler, useState } from "react";
-import { GatinhoSenderFormModule } from "../types";
-import { Button } from "../../../components/Button";
-import { Selector } from "../../../components/Selector";
-import { Switch } from "../../../components/Switch";
-import { UploadButton } from "../../../components/UploadButton";
+import { GatinhoSenderFormComponent } from "../types";
+import { Button } from "../../Button";
+import { Selector } from "../../Selector";
+import { Switch } from "../../Switch";
+import { UploadButton } from "../../UploadButton";
 import { useGatinhoSenderFormManagement } from "../../../hooks";
 
-export const GatinhoSenderFormThree: GatinhoSenderFormModule = ({
+export const GatinhoSenderFormThree: GatinhoSenderFormComponent = ({
   onSubmit,
 }) => {
   const [previewSrc, setPreviewSrc] = useState<string>();
