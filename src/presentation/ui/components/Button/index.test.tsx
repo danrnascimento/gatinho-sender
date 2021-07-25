@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { ReactComponent as LinkIcon } from "../../resources/icons/link.svg";
+import { ReactComponent as LinkIcon } from "../../../../resources/icons/link.svg";
 
-import Button from ".";
+import { Button } from ".";
 
 describe("Component: Button", () => {
   it("should render the button with icon", () => {

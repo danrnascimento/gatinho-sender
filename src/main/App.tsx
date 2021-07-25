@@ -1,6 +1,5 @@
 import React from "react";
 import { SendImageUsingFile, SendImageUsingUrl } from "../domain";
-import { ApiCommunication, Validator } from "../infra";
 
 import {
   GatinhoFormOption,
@@ -9,9 +8,6 @@ import {
 import { GatinhoSenderFormState } from "../presentation/ui/hooks";
 
 type AppProps = {
-  fileValidator: Validator;
-  urlValidator: Validator;
-  apiHandler: ApiCommunication;
   controller: SendImageUsingFile & SendImageUsingUrl;
 };
 

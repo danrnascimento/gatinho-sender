@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import UploadButton, { UploadButtonComponentProps } from ".";
+import { UploadButtonComponentProps, UploadButton } from ".";
 import userEvent from "@testing-library/user-event";
 
 const TEST_FILE = new File(["(⌐□_□)"], "file.png", {

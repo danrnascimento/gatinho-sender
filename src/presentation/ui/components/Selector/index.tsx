@@ -30,8 +30,8 @@ export const Selector: SelectorComponent = ({ src, children = [] }) => {
 
   const renderChildren = () => {
     if (Array.isArray(children)) {
-      return children.map((button) => (
-        <ButtonsListItem>{button}</ButtonsListItem>
+      return children.map((button, index) => (
+        <ButtonsListItem key={index}>{button}</ButtonsListItem>
       ));
     }
 
