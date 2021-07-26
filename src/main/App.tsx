@@ -3,9 +3,9 @@ import { SendImageUsingFile, SendImageUsingUrl } from "../domain";
 
 import {
   GatinhoFormOption,
-  GatinhoFormRenderer,
+  GatinhoSenderFormRenderer,
 } from "../presentation/ui/containers";
-import { GatinhoSenderFormState } from "../presentation/ui/hooks";
+import { GatinhoSenderFormState } from "../presentation/ui/components/GatinhoSenderForm/hooks";
 
 type AppProps = {
   controller: SendImageUsingFile & SendImageUsingUrl;
@@ -33,9 +33,10 @@ function App({ controller }: AppProps) {
   return (
     <div className="App">
       <h1>Gatinho Sender</h1>
-      <GatinhoFormRenderer
-        formOption={GatinhoFormOption.ONE}
+      <GatinhoSenderFormRenderer
+        formOption={GatinhoFormOption.TWO}
         onSubmit={handleSubmit}
+        fileToUrlParser={URL.createObjectURL}
       />
     </div>
   );

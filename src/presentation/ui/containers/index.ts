@@ -1,1 +1,1 @@
-export * from "./GatinhoFormRenderer";
+export * from "./GatinhoSenderFormRenderer";

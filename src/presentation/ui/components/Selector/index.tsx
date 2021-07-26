@@ -17,7 +17,7 @@ export type SelectorComponentProps = {
 
 type SelectorComponent = FC<SelectorComponentProps>;
 
-export const LOADING_IMAGE =
+export const PLACEHOLDER_IMAGE =
   "https://via.placeholder.com/300x150.png?text=image%20placeholder";
 
 export const ALT_IMAGE_WHEN_SRC_EXISTS = "selected cat image";
@@ -41,7 +41,7 @@ export const Selector: SelectorComponent = ({ src, children = [] }) => {
   return (
     <SelectorContainer>
       <LeftColumn>
-        <SelectedImage src={src || LOADING_IMAGE} alt={imageAlt} />
+        <SelectedImage src={src || PLACEHOLDER_IMAGE} alt={imageAlt} />
       </LeftColumn>
       <RightColumn>
         <ButtonsList>{renderChildren()}</ButtonsList>

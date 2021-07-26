@@ -20,7 +20,6 @@ describe("Validators: ValidateImageFile", () => {
     const validation = new ValidateImageFile(100);
 
     const isValid = validation.validate(BIGGER_TEST_FILE);
-    console.log(BIGGER_TEST_FILE.size);
     expect(isValid).toBe(false);
   });
 });

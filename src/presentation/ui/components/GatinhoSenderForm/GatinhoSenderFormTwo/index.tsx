@@ -8,16 +8,17 @@ import { GatinhoSenderFormComponent } from "../types";
 import { Selector } from "../../Selector";
 import { Switch } from "../../Switch";
 import { UploadButton } from "../../UploadButton";
-import { useGatinhoSenderFormManagement } from "../../../hooks";
+import { useGatinhoSenderFormManagement } from "../hooks";
 import { Button } from "../../Button";
 
 export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
   onSubmit,
+  fileToUrlParser,
 }) => {
   const [previewSrc, setPreviewSrc] = useState<string>();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { updateImageFile, updateImageUrl, updateNsfw, valid, values } =
+  const { updateImageFile, updateImageUrl, updateNsfw, hasValue, values } =
     useGatinhoSenderFormManagement();
 
   const handleAddViaUrl: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -47,7 +48,7 @@ export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form data-testid="gatinhoSenderTwo" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Cole aqui a URL da imagem de gatinho"
@@ -60,7 +61,7 @@ export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
           id="image_upload"
           name="image_upload"
           onFileUploaded={handleAddFile}
-          fileToUrlParser={URL.createObjectURL}
+          fileToUrlParser={fileToUrlParser}
         >
           Add
         </UploadButton>
@@ -68,8 +69,8 @@ export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
           NSFW
         </Switch>
       </Selector>
-      <Button type="submit" disabled={valid}>
-        Submit
+      <Button type="submit" disabled={!hasValue}>
+        Enviar
       </Button>
     </form>
   );

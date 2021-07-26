@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import {
   ALT_IMAGE_WHEN_SRC_EXISTS,
   ALT_IMAGE_WHEN_SRC_NOT_EXISTS,
-  LOADING_IMAGE,
+  PLACEHOLDER_IMAGE,
   Selector,
 } from ".";
 
@@ -14,7 +14,7 @@ describe("Component: Selector", () => {
     const imagePreview = screen.getByRole("img");
 
     expect(imagePreview).toHaveAttribute("alt", ALT_IMAGE_WHEN_SRC_NOT_EXISTS);
-    expect(imagePreview).toHaveAttribute("src", LOADING_IMAGE);
+    expect(imagePreview).toHaveAttribute("src", PLACEHOLDER_IMAGE);
   });
 
   it("should start with selected image", () => {

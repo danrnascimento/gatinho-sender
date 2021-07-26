@@ -13,10 +13,10 @@ export const useGatinhoSenderFormManagement = () => {
     nsfw: false,
   });
 
-  const [valid, setValid] = useState(false);
+  const [hasValue, setHasValue] = useState(false);
 
   const validate = (values: Pick<GatinhoSenderFormState, "file" | "url">) => {
-    return !values.file && !values.url;
+    return !!values.file || !!values.url;
   };
 
   const updateImageUrl = (newUrl: string) => {
@@ -43,8 +43,8 @@ export const useGatinhoSenderFormManagement = () => {
   };
 
   useEffect(() => {
-    setValid(validate(values));
+    setHasValue(validate(values));
   }, [values]);
 
-  return { updateImageUrl, updateImageFile, updateNsfw, values, valid };
+  return { updateImageUrl, updateImageFile, updateNsfw, values, hasValue };
 };

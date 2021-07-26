@@ -9,17 +9,18 @@ import { Button } from "../../Button";
 import { Selector } from "../../Selector";
 import { Switch } from "../../Switch";
 import { UploadButton } from "../../UploadButton";
-import { useGatinhoSenderFormManagement } from "../../../hooks";
+import { useGatinhoSenderFormManagement } from "../hooks";
 import { ReactComponent as LinkIcon } from "../../../../../resources/icons/link.svg";
 
 export const GatinhoSenderFormOne: GatinhoSenderFormComponent = ({
   onSubmit,
+  fileToUrlParser,
 }) => {
   const [previewSrc, setPreviewSrc] = useState<string>();
   const [showURLInput, setShowUrlInput] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { updateImageFile, updateImageUrl, updateNsfw, valid, values } =
+  const { updateImageFile, updateImageUrl, updateNsfw, hasValue, values } =
     useGatinhoSenderFormManagement();
 
   const handleAddViaUrl: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -41,6 +42,7 @@ export const GatinhoSenderFormOne: GatinhoSenderFormComponent = ({
       inputRef.current.value = "";
     }
 
+    setShowUrlInput(false);
     setPreviewSrc(url);
     updateImageFile(file);
   };
@@ -51,7 +53,7 @@ export const GatinhoSenderFormOne: GatinhoSenderFormComponent = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form data-testid="gatinhoSenderOne" onSubmit={handleSubmit}>
       {showURLInput && (
         <input
           type="text"
@@ -74,7 +76,7 @@ export const GatinhoSenderFormOne: GatinhoSenderFormComponent = ({
           id="image_upload"
           name="image_upload"
           onFileUploaded={handleAddFile}
-          fileToUrlParser={URL.createObjectURL}
+          fileToUrlParser={fileToUrlParser}
         >
           Add
         </UploadButton>
@@ -82,8 +84,8 @@ export const GatinhoSenderFormOne: GatinhoSenderFormComponent = ({
           NSFW
         </Switch>
       </Selector>
-      <Button type="submit" disabled={valid}>
-        Submit
+      <Button type="submit" disabled={!hasValue}>
+        Enviar
       </Button>
     </form>
   );

@@ -12,11 +12,11 @@ export enum GatinhoFormOption {
   THREE,
 }
 
-type GatinhoFormRendererComponent = FC<
+type GatinhoSenderFormRendererComponent = FC<
   GatinhoSenderFormProps & { formOption: GatinhoFormOption }
 >;
 
-export const GatinhoFormRenderer: GatinhoFormRendererComponent = ({
+export const GatinhoSenderFormRenderer: GatinhoSenderFormRendererComponent = ({
   formOption,
   ...gatinhoFormProps
 }) => {

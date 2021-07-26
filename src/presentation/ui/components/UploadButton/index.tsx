@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, FC, PropsWithChildren } from "react";
 import { LabelContainer } from "./style";
 import { ReactComponent as UploadIcon } from "../../../../resources/icons/upload.svg";
+import { ParseFileToUrl } from "../../../Helpers";
 
 type FileUploadHandler = (params: { url: string; file: File }) => void;
 
@@ -9,7 +10,7 @@ export type UploadButtonComponentProps = PropsWithChildren<{
   name: string;
   className?: string;
   onFileUploaded: FileUploadHandler;
-  fileToUrlParser: (file: File) => string;
+  fileToUrlParser: ParseFileToUrl;
 }>;
 
 type UploadButtonComponent = FC<UploadButtonComponentProps>;
