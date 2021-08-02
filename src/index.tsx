@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { LocalStorageCommunicationAdapter } from "./main/adapters";
+// import { LocalStorageAdapter } from "./main/adapters";
 import { ValidateImageFile, ValidateUrlString } from "./main/validators";
 import App from "./main/App";
 import { GatinhoSenderController } from "./presentation/controllers/GatinhoSenderController";
+import { RestAdapter } from "./main/adapters/RestAdapter";
+// import { GraphqlAdapter } from "./main/adapters/GraphqlAdapter";
 
 const urlValidator = new ValidateUrlString();
 const fileValidator = new ValidateImageFile();
-const apiHandler = new LocalStorageCommunicationAdapter();
+// const localStorageApiHandler = new LocalStorageAdapter();
+// const graphQlApiHandler = new GraphqlAdapter();
+const restApiHandler = new RestAdapter();
 
 const controller = new GatinhoSenderController(
-  apiHandler,
+  restApiHandler,
   fileValidator,
   urlValidator
 );

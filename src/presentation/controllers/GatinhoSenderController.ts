@@ -1,11 +1,12 @@
 import { SendImageUsingFile, SendImageUsingUrl } from "../../domain";
 import { ApiCommunication, Validator } from "../../infra";
+import { GatinhoSenderFormState } from "../ui/components/GatinhoSenderForm/hooks";
 
 export class GatinhoSenderController
   implements SendImageUsingFile, SendImageUsingUrl
 {
   constructor(
-    private apiCommunication: ApiCommunication,
+    private apiCommunication: ApiCommunication<GatinhoSenderFormState>,
     private imageValidation: Validator<File>,
     private urlValidator: Validator<string>
   ) {}
@@ -17,21 +18,12 @@ export class GatinhoSenderController
         return false;
       }
 
-      const fileAs64 = await this.fileToBase64(file);
-      const success = this.apiCommunication.save({ file: fileAs64, nsfw });
+      const success = this.apiCommunication.save({ file, nsfw });
       return success;
     } catch {
       return false;
     }
   }
-
-  private fileToBase64 = (file: File) =>
-    new Promise<string | undefined>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result?.toString());
-      reader.onerror = (error) => reject(error);
-    });
 
   async sendImageUsingUrl(url: string, nsfw: boolean) {
     try {

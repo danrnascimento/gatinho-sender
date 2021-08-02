@@ -1,1 +1,1 @@
-export * from "./LocalStorageCommunication";
+export * from "./LocalStorageAdapter";

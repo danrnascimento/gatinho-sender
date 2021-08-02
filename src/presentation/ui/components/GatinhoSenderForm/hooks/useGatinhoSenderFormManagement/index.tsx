@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 export type GatinhoSenderFormState = {
-  url: string | null;
-  file: File | null;
+  url?: string | null;
+  file?: File | null;
   nsfw: boolean;
 };
 

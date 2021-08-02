@@ -11,7 +11,7 @@ type AppProps = {
   controller: SendImageUsingFile & SendImageUsingUrl;
 };
 
-function App({ controller }: AppProps) {
+const useImageSubmission = (controller: AppProps["controller"]) => {
   const handleSubmit = async ({ file, nsfw, url }: GatinhoSenderFormState) => {
     if (!file && !url) {
       return alert("é necessário adicionar um arquivo ou url");
@@ -29,6 +29,12 @@ function App({ controller }: AppProps) {
       );
     }
   };
+
+  return { handleSubmit };
+};
+
+function App({ controller }: AppProps) {
+  const { handleSubmit } = useImageSubmission(controller);
 
   return (
     <div className="App">
