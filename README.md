@@ -5,9 +5,9 @@
 ### Goal
 
 Create a simple app to upload images and Should be able to have multiples styles and different implementations
-but the presentation layer (react components, etc) shouldn't know anything about the api communication, etc.
+but the presentation layer (react, styled components, etc) shouldn't know anything about the API communication, etc.
 
-I need to create three differents options to implement the upload api.
+I need to create three different options to implement the upload API.
 
 - Local Storage;
 - Graphql;
@@ -15,9 +15,9 @@ I need to create three differents options to implement the upload api.
 
 I need to create three different options to upload the image or save the image link.
 
-- A form with upload button and a button to show a input to add the image URL.
-- A form with upload button and always show the url input.
-- A form with upload button only.
+- A form with an upload button and a button to show the input to add the image URL.
+- A form with an upload button and always shows the URL input.
+- A form with an upload button only.
 
 ### Diagram
 
