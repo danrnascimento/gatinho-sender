@@ -21,4 +21,4 @@ I need to create three different options to upload the image or save the image l
 
 ### Diagram
 
-![diagram]('./docs/diagram.png')
+![diagram](./docs/diagram.png)
