@@ -39,6 +39,7 @@ function App({ controller }: AppProps) {
   return (
     <div className="App">
       <h1>Gatinho Sender</h1>
+
       <GatinhoSenderFormRenderer
         formOption={GatinhoFormOption.THREE}
         onSubmit={handleSubmit}
