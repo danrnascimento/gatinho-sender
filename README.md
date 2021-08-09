@@ -29,3 +29,6 @@ I need to create three different options to upload the image or save the image l
   - Rest: `yarn start:rest`
   - Graphql: `yarn start:gql`
 - Start the app
+- Access `/` to use the Form one.
+- Access `/two` to use the Form two.
+- Access `/three` to use the Form three.
