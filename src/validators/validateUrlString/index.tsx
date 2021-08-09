@@ -1,4 +1,4 @@
-import { Validator } from "../../../infra/protocols";
+import { Validator } from "../../protocols";
 
 export class ValidateUrlString implements Validator<string> {
   validate = (url: string) => {

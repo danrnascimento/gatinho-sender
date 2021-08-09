@@ -10,7 +10,7 @@ import { Selector } from "../../Selector";
 import { Switch } from "../../Switch";
 import { UploadButton } from "../../UploadButton";
 import { useGatinhoSenderFormManagement } from "../hooks";
-import { ReactComponent as LinkIcon } from "../../../../../resources/icons/link.svg";
+import { ReactComponent as LinkIcon } from "../../../../resources/icons/link.svg";
 
 export const GatinhoSenderFormOne: GatinhoSenderFormComponent = ({
   onSubmit,

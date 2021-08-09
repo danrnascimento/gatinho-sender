@@ -1,38 +1,45 @@
-import { SendImageUsingFile, SendImageUsingUrl } from "../../domain";
-import { ApiCommunication, Validator } from "../../infra";
-import { GatinhoSenderFormState } from "../ui/components/GatinhoSenderForm/hooks";
+import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
+import { GatinhoSenderProvider, Validator } from "../../protocols";
 
 export class GatinhoSenderController
   implements SendImageUsingFile, SendImageUsingUrl
 {
   constructor(
-    private apiCommunication: ApiCommunication<GatinhoSenderFormState>,
+    private provider: GatinhoSenderProvider,
     private imageValidation: Validator<File>,
     private urlValidator: Validator<string>
   ) {}
 
-  async sendImageUsingFile(file: File, nsfw: boolean) {
+  async sendImageUsingFile({ file, nsfw }: SendImageUsingFile.Params) {
     try {
+      if (!file) {
+        return false;
+      }
+
       const imageIsValid = this.imageValidation.validate(file);
       if (!imageIsValid) {
         return false;
       }
 
-      const success = this.apiCommunication.save({ file, nsfw });
+      const success = this.provider.save({ file, nsfw });
       return success;
     } catch {
       return false;
     }
   }
 
-  async sendImageUsingUrl(url: string, nsfw: boolean) {
+  async sendImageUsingUrl({ url, nsfw }: SendImageUsingUrl.Params) {
     try {
+      if (!url) {
+        return false;
+      }
+
       const urlIsValid = this.urlValidator.validate(url);
       if (!urlIsValid) {
         return false;
       }
 
-      const success = this.apiCommunication.save({ url, nsfw });
+      const success = this.provider.save({ url, nsfw });
       return success;
     } catch {
       return false;

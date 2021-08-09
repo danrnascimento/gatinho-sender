@@ -1,7 +1,6 @@
-import { ApiCommunication } from "../../infra";
-import { GatinhoSenderFormState } from "../../presentation/ui/components/GatinhoSenderForm/hooks";
 import { ApolloClient, InMemoryCache, gql, from } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { GatinhoSenderProvider } from "../protocols";
 
 const UPLOAD_MUTATION = gql`
   mutation ($singleUploadFile: Upload!, $nsfw: Boolean!) {
@@ -15,9 +14,7 @@ const SAVE_URL_MUTATION = gql`
   }
 `;
 
-export class GraphqlAdapter
-  implements ApiCommunication<GatinhoSenderFormState>
-{
+export class GraphqlProvider implements GatinhoSenderProvider {
   private client: ApolloClient<any>;
 
   constructor() {
@@ -31,7 +28,7 @@ export class GraphqlAdapter
     });
   }
 
-  async save({ file, url, nsfw }: GatinhoSenderFormState) {
+  async save({ file, url, nsfw }: GatinhoSenderProvider.Params) {
     const saveFile = async () =>
       await this.client.mutate({
         mutation: UPLOAD_MUTATION,

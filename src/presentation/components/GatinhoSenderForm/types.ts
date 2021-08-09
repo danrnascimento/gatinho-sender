@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ParseFileToUrl } from "../../../Helpers";
+import { ParseFileToUrl } from "../../Helpers";
 import { GatinhoSenderFormState } from "./hooks";
 
 export type GatinhoSenderFormProps = {

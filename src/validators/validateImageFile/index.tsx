@@ -1,4 +1,4 @@
-import { Validator } from "../../../infra/protocols";
+import { Validator } from "../../protocols";
 
 export const DEFAULT_MAX_ALLOWED_SIZE = 5000000; //5Mb
 

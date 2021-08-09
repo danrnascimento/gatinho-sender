@@ -24,9 +24,15 @@ app.post("/upload", async (req, res) => {
       });
     }
 
-    const image = req.files.image;
+    const { image } = req.files;
+    const { nsfw } = req.body;
 
     image.mv(`./api/images/${Math.random()}-${image.name}`);
+
+    console.log(
+      "[upload file] success:",
+      JSON.stringify({ image: image.name, nsfw })
+    );
 
     res.status(200).json({
       data: {
@@ -50,7 +56,9 @@ app.post("/url", async (req, res) => {
       });
     }
 
-    const { url } = req.body;
+    const { url, nsfw } = req.body;
+
+    console.log("[save url] success:", JSON.stringify({ url, nsfw }));
 
     res.status(200).json({
       data: {

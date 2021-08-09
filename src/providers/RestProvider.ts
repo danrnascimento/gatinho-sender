@@ -1,11 +1,10 @@
-import { ApiCommunication } from "../../infra";
-import { GatinhoSenderFormState } from "../../presentation/ui/components/GatinhoSenderForm/hooks";
+import { GatinhoSenderProvider } from "../protocols";
 
 const UPLOAD_ENDPOINT = "http://localhost:3333/upload";
 const SAVE_URL_ENDPOINT = "http://localhost:3333/url";
 
-export class RestAdapter implements ApiCommunication<GatinhoSenderFormState> {
-  async save({ nsfw, file, url }: GatinhoSenderFormState) {
+export class RestProvider implements GatinhoSenderProvider {
+  async save({ nsfw, file, url }: GatinhoSenderProvider.Params) {
     try {
       const formData = new FormData();
       formData.append("nsfw", nsfw.toString());
@@ -18,8 +17,6 @@ export class RestAdapter implements ApiCommunication<GatinhoSenderFormState> {
         formData.append("url", url);
         endpoint = SAVE_URL_ENDPOINT;
       }
-
-      console.log({ file, url, endpoint });
 
       const result = await fetch(endpoint, {
         method: "POST",

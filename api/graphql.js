@@ -1,6 +1,7 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 const { GraphQLUpload, graphqlUploadExpress } = require("graphql-upload");
+const fs = require("fs");
 
 const typeDefs = gql`
   # The implementation for this scalar is provided by the
@@ -31,21 +32,25 @@ const resolvers = {
   Upload: GraphQLUpload,
 
   Mutation: {
-    singleUpload: async (parent, { file }) => {
-      const { createReadStream } = await file;
-
-      // Invoking the `createReadStream` will return a Readable Stream.
-      // See https://nodejs.org/api/stream.html#stream_readable_streams
+    singleUpload: async (_, { file, nsfw }) => {
+      const { createReadStream, filename } = await file;
       const stream = createReadStream();
 
-      // This is purely for demonstration purposes and will overwrite the
-      // local-file-output.txt in the current working directory on EACH upload.
-      const out = require("fs").createWriteStream("local-file-output.txt");
+      const out = fs.createWriteStream(
+        `./api/images/${Math.random()}-${filename}`
+      );
+
       stream.pipe(out);
 
+      console.log(
+        "[upload file] success:",
+        JSON.stringify({ file: filename, nsfw })
+      );
       return true;
     },
-    saveUrl: async (parent, { url }) => {
+
+    saveUrl: async (_, { url, nsfw }) => {
+      console.log("[save url] success:", JSON.stringify({ url, nsfw }));
       return Boolean(url);
     },
   },

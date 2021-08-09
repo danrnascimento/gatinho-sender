@@ -1,11 +1,11 @@
 import React from "react";
-import { SendImageUsingFile, SendImageUsingUrl } from "../domain";
+import { SendImageUsingFile, SendImageUsingUrl } from "./useCases";
 
 import {
   GatinhoFormOption,
   GatinhoSenderFormRenderer,
-} from "../presentation/ui/containers";
-import { GatinhoSenderFormState } from "../presentation/ui/components/GatinhoSenderForm/hooks";
+} from "./presentation/containers";
+import { GatinhoSenderFormState } from "./presentation/components/GatinhoSenderForm/hooks";
 
 type AppProps = {
   controller: SendImageUsingFile & SendImageUsingUrl;
@@ -18,12 +18,12 @@ const useImageSubmission = (controller: AppProps["controller"]) => {
     }
 
     if (url) {
-      const saved = await controller.sendImageUsingUrl(url, nsfw);
+      const saved = await controller.sendImageUsingUrl({ url, nsfw });
       return alert(saved ? "sucesso ao salvar url" : "erro ao salvar url");
     }
 
     if (file) {
-      const saved = await controller.sendImageUsingFile(file, nsfw);
+      const saved = await controller.sendImageUsingFile({ file, nsfw });
       return alert(
         saved ? "sucesso ao salvar imagem" : "erro ao salvar imagem"
       );

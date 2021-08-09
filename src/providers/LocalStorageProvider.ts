@@ -1,10 +1,7 @@
-import { ApiCommunication } from "../../infra/protocols";
-import { GatinhoSenderFormState } from "../../presentation/ui/components/GatinhoSenderForm/hooks";
+import { GatinhoSenderProvider } from "../protocols";
 
-export class LocalStorageAdapter
-  implements ApiCommunication<GatinhoSenderFormState>
-{
-  async save({ url, file, nsfw }: GatinhoSenderFormState) {
+export class LocalStorageProvider implements GatinhoSenderProvider {
+  async save({ url, file, nsfw }: GatinhoSenderProvider.Params) {
     try {
       let dataAsString = "";
 
