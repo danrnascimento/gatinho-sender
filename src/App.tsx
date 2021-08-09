@@ -1,14 +1,14 @@
 import React from "react";
-import { SendImageUsingFile, SendImageUsingUrl } from "./useCases";
 
 import {
   GatinhoFormOption,
   GatinhoSenderFormRenderer,
 } from "./presentation/containers";
 import { GatinhoSenderFormState } from "./presentation/components/GatinhoSenderForm/hooks";
+import { GatinhoSenderController } from "./presentation/controllers";
 
 type AppProps = {
-  controller: SendImageUsingFile & SendImageUsingUrl;
+  controller: GatinhoSenderController;
 };
 
 const useImageSubmission = (controller: AppProps["controller"]) => {
