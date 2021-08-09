@@ -1,5 +1,5 @@
-import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
-import { GatinhoSenderProvider, Validator } from "../../protocols";
+import { SendImageUsingFile, SendImageUsingUrl } from "../../../useCases";
+import { GatinhoSenderProvider, Validator } from "../../../protocols";
 
 export class GatinhoSenderController
   implements SendImageUsingFile, SendImageUsingUrl
@@ -21,7 +21,7 @@ export class GatinhoSenderController
         return false;
       }
 
-      const success = this.provider.save({ file, nsfw });
+      const success = await this.provider.save({ file, nsfw });
       return success;
     } catch {
       return false;
@@ -39,7 +39,7 @@ export class GatinhoSenderController
         return false;
       }
 
-      const success = this.provider.save({ url, nsfw });
+      const success = await this.provider.save({ url, nsfw });
       return success;
     } catch {
       return false;

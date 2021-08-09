@@ -1,4 +1,4 @@
-import { GatinhoSenderController } from "../presentation/controllers/GatinhoSenderController";
+import { GatinhoSenderController } from "../presentation/controllers";
 import { GraphqlProvider } from "../providers";
 import { ValidateImageFile, ValidateUrlString } from "../validators";
 
