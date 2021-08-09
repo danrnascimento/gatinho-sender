@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { makeLocalStorageController } from "./factories";
+import { makeGraphQlController } from "./factories";
 
-const controller = makeLocalStorageController();
+const controller = makeGraphQlController();
 
 ReactDOM.render(
   <React.StrictMode>
