@@ -1,11 +1,14 @@
 import React from "react";
 
-import {
-  GatinhoFormOption,
-  GatinhoSenderFormRenderer,
-} from "./presentation/containers";
+import { Route, Switch, Router } from "react-router";
 import { GatinhoSenderFormState } from "./presentation/components/GatinhoSenderForm/hooks";
 import { GatinhoSenderController } from "./presentation/controllers";
+import {
+  GatinhoSenderFormOne,
+  GatinhoSenderFormThree,
+  GatinhoSenderFormTwo,
+} from "./presentation/components/GatinhoSenderForm";
+import { createBrowserHistory } from "history";
 
 type AppProps = {
   controller: GatinhoSenderController;
@@ -39,12 +42,28 @@ function App({ controller }: AppProps) {
   return (
     <div className="App">
       <h1>Gatinho Sender</h1>
-
-      <GatinhoSenderFormRenderer
-        formOption={GatinhoFormOption.THREE}
-        onSubmit={handleSubmit}
-        fileToUrlParser={URL.createObjectURL}
-      />
+      <Router history={createBrowserHistory()}>
+        <Switch>
+          <Route path="/three">
+            <GatinhoSenderFormThree
+              onSubmit={handleSubmit}
+              fileToUrlParser={URL.createObjectURL}
+            />
+          </Route>
+          <Route path="/two">
+            <GatinhoSenderFormTwo
+              onSubmit={handleSubmit}
+              fileToUrlParser={URL.createObjectURL}
+            />
+          </Route>
+          <Route path="/">
+            <GatinhoSenderFormOne
+              onSubmit={handleSubmit}
+              fileToUrlParser={URL.createObjectURL}
+            />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
