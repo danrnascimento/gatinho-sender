@@ -1,10 +1,13 @@
+import { DefaultSendImage } from "./defaultSendImage";
+
 export interface SendImageUsingFile {
-  sendImageUsingFile: (
-    data: SendImageUsingFile.Params
-  ) => SendImageUsingFile.Result;
+  sendImageUsingFile: DefaultSendImage<
+    SendImageUsingFile.Params,
+    SendImageUsingFile.Result
+  >;
 }
 
 export namespace SendImageUsingFile {
-  export type Params = { file?: File; nsfw: boolean };
-  export type Result = Promise<boolean>;
+  export type Params = { file?: File } & DefaultSendImage.Params;
+  export type Result = DefaultSendImage.Result;
 }
