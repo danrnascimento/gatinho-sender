@@ -10,39 +10,40 @@ export class GatinhoSenderController
     private urlValidator: Validator<string>
   ) {}
 
-  async sendImageUsingFile({ file, nsfw }: SendImageUsingFile.Params) {
+  private async sendImageWrappper<Value = string | File>({
+    validator,
+    onSuccess,
+    valueToCheck,
+  }: {
+    validator: Validator<Value>["validate"];
+    onSuccess: () => GatinhoSenderProvider.Result;
+    valueToCheck?: Value;
+  }) {
     try {
-      if (!file) {
-        return false;
-      }
+      if (!valueToCheck) return false;
 
-      const imageIsValid = this.imageValidation.validate(file);
-      if (!imageIsValid) {
-        return false;
-      }
+      const valueIsValid = validator(valueToCheck);
+      if (!valueIsValid) return false;
 
-      const success = await this.provider.save({ file, nsfw });
-      return success;
+      return onSuccess();
     } catch {
       return false;
     }
   }
 
-  async sendImageUsingUrl({ url, nsfw }: SendImageUsingUrl.Params) {
-    try {
-      if (!url) {
-        return false;
-      }
+  public async sendImageUsingFile({ file, nsfw }: SendImageUsingFile.Params) {
+    return this.sendImageWrappper({
+      valueToCheck: file,
+      validator: this.imageValidation.validate,
+      onSuccess: () => this.provider.save({ file, nsfw }),
+    });
+  }
 
-      const urlIsValid = this.urlValidator.validate(url);
-      if (!urlIsValid) {
-        return false;
-      }
-
-      const success = await this.provider.save({ url, nsfw });
-      return success;
-    } catch {
-      return false;
-    }
+  public async sendImageUsingUrl({ url, nsfw }: SendImageUsingUrl.Params) {
+    return this.sendImageWrappper({
+      valueToCheck: url,
+      validator: this.urlValidator.validate,
+      onSuccess: () => this.provider.save({ url, nsfw }),
+    });
   }
 }

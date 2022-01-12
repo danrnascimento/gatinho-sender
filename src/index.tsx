@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { makeGraphQlController } from "./factories";
+import { ControllerType, makeController } from "./factories";
 
-const controller = makeGraphQlController();
+const controller = makeController(ControllerType.GRAPHQL);
 
 ReactDOM.render(
   <React.StrictMode>
