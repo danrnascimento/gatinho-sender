@@ -11,6 +11,7 @@ export const SwitchIndicator = styled.div<{ checked: boolean }>`
   margin-left: 16px;
   background-color: ${({ checked }) => (checked ? "#2F847C" : "#A9B2C3")};
   position: relative;
+  top: 3px;
   display: inline-flex;
   align-items: center;
   transition: all ease 0.3s;

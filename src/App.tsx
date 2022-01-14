@@ -2,13 +2,15 @@ import React from "react";
 
 import { Route, Switch, Router } from "react-router";
 import { GatinhoSenderFormState } from "./presentation/components/GatinhoSenderForm/hooks";
-import { GatinhoSenderController } from "./presentation/controllers";
+import { GatinhoSenderController } from "./controllers";
 import {
   GatinhoSenderFormOne,
   GatinhoSenderFormThree,
   GatinhoSenderFormTwo,
 } from "./presentation/components/GatinhoSenderForm";
 import { createBrowserHistory } from "history";
+import { AppContainer, Title } from "./presentation/components";
+import { GlobalStyles } from "./presentation/resources/styles/global";
 
 type AppProps = {
   controller: GatinhoSenderController;
@@ -40,8 +42,8 @@ function App({ controller }: AppProps) {
   const { handleSubmit } = useImageSubmission(controller);
 
   return (
-    <div className="App">
-      <h1>Gatinho Sender</h1>
+    <AppContainer>
+      <Title>Gatinho Sender</Title>
       <Router history={createBrowserHistory()}>
         <Switch>
           <Route path="/three">
@@ -64,7 +66,8 @@ function App({ controller }: AppProps) {
           </Route>
         </Switch>
       </Router>
-    </div>
+      <GlobalStyles />
+    </AppContainer>
   );
 }
 

@@ -1,4 +1,4 @@
-import { GatinhoSenderController } from "../presentation/controllers";
+import { GatinhoSenderController } from "../controllers";
 import {
   GraphqlProvider,
   LocalStorageProvider,
@@ -8,9 +8,6 @@ import { ValidateImageFile, ValidateUrlString } from "../validators";
 
 const urlValidator = new ValidateUrlString();
 const fileValidator = new ValidateImageFile();
-const localStorageProvider = new LocalStorageProvider();
-const graphQlProvider = new GraphqlProvider();
-const restProvider = new RestProvider();
 
 export enum ControllerType {
   REST = "rest",
@@ -20,9 +17,9 @@ export enum ControllerType {
 
 export const makeController = (controllerType: ControllerType) => {
   const provider = {
-    [ControllerType.GRAPHQL]: graphQlProvider,
-    [ControllerType.REST]: restProvider,
-    [ControllerType.LOCAL_STORAGE]: localStorageProvider,
+    [ControllerType.GRAPHQL]: new GraphqlProvider(),
+    [ControllerType.REST]: new RestProvider(),
+    [ControllerType.LOCAL_STORAGE]: new LocalStorageProvider(),
   }[controllerType];
 
   return new GatinhoSenderController(provider, fileValidator, urlValidator);

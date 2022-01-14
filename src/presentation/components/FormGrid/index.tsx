@@ -7,15 +7,15 @@ import {
   LeftColumn,
   RightColumn,
   SelectedImage,
-  SelectorContainer,
+  FormGridContainer,
 } from "./style";
 
-export type SelectorComponentProps = {
+export type FormGridComponentProps = {
   children?: ReactElement[] | ReactElement;
   src?: string;
 };
 
-type SelectorComponent = FC<SelectorComponentProps>;
+type FormGridComponent = FC<FormGridComponentProps>;
 
 export const PLACEHOLDER_IMAGE =
   "https://via.placeholder.com/300x150.png?text=image%20placeholder";
@@ -23,7 +23,7 @@ export const PLACEHOLDER_IMAGE =
 export const ALT_IMAGE_WHEN_SRC_EXISTS = "selected cat image";
 export const ALT_IMAGE_WHEN_SRC_NOT_EXISTS = "waiting user add an image";
 
-export const Selector: SelectorComponent = ({ src, children = [] }) => {
+export const FormGrid: FormGridComponent = ({ src, children = [] }) => {
   const imageAlt = src
     ? ALT_IMAGE_WHEN_SRC_EXISTS
     : ALT_IMAGE_WHEN_SRC_NOT_EXISTS;
@@ -39,13 +39,13 @@ export const Selector: SelectorComponent = ({ src, children = [] }) => {
   };
 
   return (
-    <SelectorContainer>
+    <FormGridContainer>
       <LeftColumn>
         <SelectedImage src={src || PLACEHOLDER_IMAGE} alt={imageAlt} />
       </LeftColumn>
       <RightColumn>
         <ButtonsList>{renderChildren()}</ButtonsList>
       </RightColumn>
-    </SelectorContainer>
+    </FormGridContainer>
   );
 };

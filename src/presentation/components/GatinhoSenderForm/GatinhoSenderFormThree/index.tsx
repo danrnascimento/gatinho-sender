@@ -1,7 +1,7 @@
 import React, { FormEventHandler, useState } from "react";
 import { GatinhoSenderFormComponent } from "../types";
 import { Button } from "../../Button";
-import { Selector } from "../../Selector";
+import { FormGrid } from "../../FormGrid";
 import { Switch } from "../../Switch";
 import { UploadButton } from "../../UploadButton";
 import { useGatinhoSenderFormManagement } from "../hooks";
@@ -28,20 +28,20 @@ export const GatinhoSenderFormThree: GatinhoSenderFormComponent = ({
 
   return (
     <form data-testid="gatinhoSenderThree" onSubmit={handleSubmit}>
-      <UploadButton
-        key="image_upload"
-        id="image_upload"
-        name="image_upload"
-        onFileUploaded={handleAddFile}
-        fileToUrlParser={fileToUrlParser}
-      >
-        Selecione aqui a imagem de gatinho
-      </UploadButton>
-      <Selector src={previewSrc}>
+      <FormGrid src={previewSrc}>
+        <UploadButton
+          key="image_upload"
+          id="image_upload"
+          name="image_upload"
+          onFileUploaded={handleAddFile}
+          fileToUrlParser={fileToUrlParser}
+        >
+          Selecione aqui a imagem de gatinho
+        </UploadButton>
         <Switch id="nsfw" name="nsfw" onChange={updateNsfw}>
           NSFW
         </Switch>
-      </Selector>
+      </FormGrid>
       <Button type="submit" disabled={!hasValue}>
         Enviar
       </Button>

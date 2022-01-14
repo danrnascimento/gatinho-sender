@@ -5,11 +5,13 @@ import React, {
   useState,
 } from "react";
 import { GatinhoSenderFormComponent } from "../types";
-import { Selector } from "../../Selector";
+import { FormGrid } from "../../FormGrid";
 import { Switch } from "../../Switch";
 import { UploadButton } from "../../UploadButton";
 import { useGatinhoSenderFormManagement } from "../hooks";
 import { Button } from "../../Button";
+import { AddButtonContainer } from "../style";
+import { Input } from "../..";
 
 export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
   onSubmit,
@@ -49,26 +51,31 @@ export const GatinhoSenderFormTwo: GatinhoSenderFormComponent = ({
 
   return (
     <form data-testid="gatinhoSenderTwo" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Cole aqui a URL da imagem de gatinho"
-        ref={inputRef}
-        onBlur={handleAddViaUrl}
-      />
-      <Selector src={previewSrc}>
-        <UploadButton
-          key="image_upload"
-          id="image_upload"
-          name="image_upload"
-          onFileUploaded={handleAddFile}
-          fileToUrlParser={fileToUrlParser}
-        >
-          Add
-        </UploadButton>
+      <FormGrid src={previewSrc}>
+        <AddButtonContainer>
+          <Input
+            type="text"
+            placeholder="Cole aqui a URL da imagem de gatinho"
+            ref={inputRef}
+            onBlur={handleAddViaUrl}
+          />
+        </AddButtonContainer>
+        <AddButtonContainer>
+          <UploadButton
+            key="image_upload"
+            id="image_upload"
+            name="image_upload"
+            onFileUploaded={handleAddFile}
+            fileToUrlParser={fileToUrlParser}
+          >
+            Add File
+          </UploadButton>
+        </AddButtonContainer>
+
         <Switch id="nsfw" name="nsfw" onChange={updateNsfw}>
           NSFW
         </Switch>
-      </Selector>
+      </FormGrid>
       <Button type="submit" disabled={!hasValue}>
         Enviar
       </Button>

@@ -1,5 +1,5 @@
-import { SendImageUsingFile, SendImageUsingUrl } from "../../../useCases";
-import { GatinhoSenderProvider, Validator } from "../../../protocols";
+import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
+import { GatinhoSenderProvider, Validator } from "../../protocols";
 
 export class GatinhoSenderController
   implements SendImageUsingFile, SendImageUsingUrl

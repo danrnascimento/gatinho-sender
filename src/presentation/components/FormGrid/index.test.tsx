@@ -4,12 +4,12 @@ import {
   ALT_IMAGE_WHEN_SRC_EXISTS,
   ALT_IMAGE_WHEN_SRC_NOT_EXISTS,
   PLACEHOLDER_IMAGE,
-  Selector,
+  FormGrid,
 } from ".";
 
-describe("Component: Selector", () => {
+describe("Component: FormGrid", () => {
   it("should start with default image", () => {
-    render(<Selector />);
+    render(<FormGrid />);
 
     const imagePreview = screen.getByRole("img");
 
@@ -18,7 +18,7 @@ describe("Component: Selector", () => {
   });
 
   it("should start with selected image", () => {
-    render(<Selector src="image.png" />);
+    render(<FormGrid src="image.png" />);
 
     const imagePreview = screen.getByRole("img");
 
@@ -28,10 +28,10 @@ describe("Component: Selector", () => {
 
   it("should render the buttons passed trought the props", () => {
     render(
-      <Selector>
+      <FormGrid>
         <button key="1">test 1</button>
         <button key="2">test 2</button>
-      </Selector>
+      </FormGrid>
     );
 
     const buttonOne = screen.getByRole("button", { name: "test 1" });
