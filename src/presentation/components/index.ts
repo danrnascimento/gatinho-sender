@@ -5,3 +5,5 @@ export * from "./UploadButton";
 export * from "./Container";
 export * from "./Title";
 export * from "./Input";
+export * from "./GatinhoSenderFormPicker";
+export * from "./AppContainer";

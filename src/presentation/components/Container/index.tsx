@@ -1,1 +1,1 @@
-export { Container as AppContainer } from "./style";
+export { Container } from "./style";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Switch, Router } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GatinhoSenderFormState } from "./presentation/components/GatinhoSenderForm/hooks";
 import { GatinhoSenderController } from "./controllers";
 import {
@@ -8,9 +8,7 @@ import {
   GatinhoSenderFormThree,
   GatinhoSenderFormTwo,
 } from "./presentation/components/GatinhoSenderForm";
-import { createBrowserHistory } from "history";
-import { AppContainer, Title } from "./presentation/components";
-import { GlobalStyles } from "./presentation/resources/styles/global";
+import { RoutesWrapper } from "./presentation/routes";
 
 type AppProps = {
   controller: GatinhoSenderController;
@@ -42,32 +40,11 @@ function App({ controller }: AppProps) {
   const { handleSubmit } = useImageSubmission(controller);
 
   return (
-    <AppContainer>
-      <Title>Gatinho Sender</Title>
-      <Router history={createBrowserHistory()}>
-        <Switch>
-          <Route path="/three">
-            <GatinhoSenderFormThree
-              onSubmit={handleSubmit}
-              fileToUrlParser={URL.createObjectURL}
-            />
-          </Route>
-          <Route path="/two">
-            <GatinhoSenderFormTwo
-              onSubmit={handleSubmit}
-              fileToUrlParser={URL.createObjectURL}
-            />
-          </Route>
-          <Route path="/">
-            <GatinhoSenderFormOne
-              onSubmit={handleSubmit}
-              fileToUrlParser={URL.createObjectURL}
-            />
-          </Route>
-        </Switch>
-      </Router>
-      <GlobalStyles />
-    </AppContainer>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<RoutesWrapper />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

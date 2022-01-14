@@ -11,6 +11,7 @@ export const buttonStyle = css`
   min-width: 100px;
   background-color: #000;
   color: #fff;
+  cursor: pointer;
 
   svg {
     height: 1em;
