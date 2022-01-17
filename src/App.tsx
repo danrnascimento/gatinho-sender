@@ -1,39 +1,60 @@
 import React from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GatinhoSenderFormState } from "./presentation/components/GatinhoSenderForm/hooks";
 import { GatinhoSenderController } from "./controllers";
 import {
   GatinhoSenderFormOne,
   GatinhoSenderFormThree,
   GatinhoSenderFormTwo,
 } from "./presentation/components/GatinhoSenderForm";
-import { RoutesWrapper } from "./presentation/routes";
+import {
+  AppContainer,
+  GatinhoSenderFormPickerWithNavigate,
+} from "./presentation/components";
+import { GatinhoSenderFormProps } from "./presentation/components/GatinhoSenderForm/types";
+import useImageSubmission from "./hooks/useImageSubmission";
 
 type AppProps = {
   controller: GatinhoSenderController;
 };
 
-const useImageSubmission = (controller: AppProps["controller"]) => {
-  const handleSubmit = async ({ file, nsfw, url }: GatinhoSenderFormState) => {
-    if (!file && !url) {
-      return alert("é necessário adicionar um arquivo ou uma url");
-    }
-
-    if (url) {
-      const saved = await controller.sendImageUsingUrl({ url, nsfw });
-      return alert(saved ? "sucesso ao salvar url" : "erro ao salvar url");
-    }
-
-    if (file) {
-      const saved = await controller.sendImageUsingFile({ file, nsfw });
-      return alert(
-        saved ? "sucesso ao salvar imagem" : "erro ao salvar imagem"
-      );
-    }
-  };
-
-  return { handleSubmit };
+const PagesWrapper = ({
+  onSubmit,
+}: Pick<GatinhoSenderFormProps, "onSubmit">) => {
+  return (
+    <AppContainer>
+      <GatinhoSenderFormPickerWithNavigate />
+      <Routes>
+        <Route
+          path="/three"
+          element={
+            <GatinhoSenderFormThree
+              onSubmit={onSubmit}
+              fileToUrlParser={URL.createObjectURL}
+            />
+          }
+        />
+        <Route
+          path="/two"
+          element={
+            <GatinhoSenderFormTwo
+              onSubmit={onSubmit}
+              fileToUrlParser={URL.createObjectURL}
+            />
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            <GatinhoSenderFormOne
+              onSubmit={onSubmit}
+              fileToUrlParser={URL.createObjectURL}
+            />
+          }
+        />
+      </Routes>
+    </AppContainer>
+  );
 };
 
 function App({ controller }: AppProps) {
@@ -42,7 +63,7 @@ function App({ controller }: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<RoutesWrapper />} />
+        <Route path="/*" element={<PagesWrapper onSubmit={handleSubmit} />} />
       </Routes>
     </BrowserRouter>
   );

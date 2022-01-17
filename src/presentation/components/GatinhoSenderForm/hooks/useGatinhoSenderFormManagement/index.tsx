@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-
-export type GatinhoSenderFormState = {
-  url?: string | null;
-  file?: File | null;
-  nsfw: boolean;
-};
+import { GatinhoSenderFormState } from "../../types";
 
 export const useGatinhoSenderFormManagement = () => {
   const [values, setValues] = useState<GatinhoSenderFormState>({
-    file: null,
-    url: null,
+    file: undefined,
+    url: undefined,
     nsfw: false,
   });
 
@@ -22,7 +17,7 @@ export const useGatinhoSenderFormManagement = () => {
   const updateImageUrl = (newUrl: string) => {
     setValues((currentState) => ({
       ...currentState,
-      file: null,
+      file: undefined,
       url: newUrl,
     }));
   };
@@ -30,7 +25,7 @@ export const useGatinhoSenderFormManagement = () => {
   const updateImageFile = (newFile: File) => {
     setValues((currentState) => ({
       ...currentState,
-      url: null,
+      url: undefined,
       file: newFile,
     }));
   };

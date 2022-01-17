@@ -1,6 +1,9 @@
 import { FC } from "react";
 import { ParseFileToUrl } from "../../../protocols";
-import { GatinhoSenderFormState } from "./hooks";
+import { SendImageUsingFile, SendImageUsingUrl } from "../../../useCases";
+
+export type GatinhoSenderFormState = SendImageUsingFile.Params &
+  SendImageUsingUrl.Params;
 
 export type GatinhoSenderFormProps = {
   onSubmit: (value: GatinhoSenderFormState) => void;
