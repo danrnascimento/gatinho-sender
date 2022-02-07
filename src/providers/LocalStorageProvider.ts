@@ -1,7 +1,7 @@
-import { GatinhoSenderProvider } from "../protocols";
+import { Provider } from "../protocols";
 
-export class LocalStorageProvider implements GatinhoSenderProvider {
-  async save({ url, file, nsfw }: GatinhoSenderProvider.Params) {
+export class LocalStorageProvider implements Provider {
+  async save({ url, file, nsfw }: Provider.Params) {
     try {
       let dataAsString = "";
 
@@ -13,10 +13,12 @@ export class LocalStorageProvider implements GatinhoSenderProvider {
       }
 
       window.localStorage.setItem("__image", dataAsString);
-      return true;
-    } catch (error) {
-      console.error(error);
-      return false;
+      return { data: dataAsString };
+    } catch (e) {
+      let error: Error = new Error("Erro ao salvar imagem");
+      if (e instanceof Error) error = e;
+
+      return { data: undefined, error };
     }
   }
 

@@ -7,5 +7,5 @@ export interface DefaultSendImage<
 
 export namespace DefaultSendImage {
   export type Params = { nsfw: boolean };
-  export type Result = Promise<boolean>;
+  export type Result = Promise<{ data?: Boolean | Object; error?: Error }>;
 }

@@ -1,10 +1,10 @@
-import { GatinhoSenderProvider } from "../protocols";
+import { Provider } from "../protocols";
 
 const UPLOAD_ENDPOINT = "http://localhost:3333/upload";
 const SAVE_URL_ENDPOINT = "http://localhost:3333/url";
 
-export class RestProvider implements GatinhoSenderProvider {
-  async save({ nsfw, file, url }: GatinhoSenderProvider.Params) {
+export class RestProvider implements Provider {
+  async save({ nsfw, file, url }: Provider.Params) {
     try {
       const formData = new FormData();
       formData.append("nsfw", nsfw.toString());
@@ -24,12 +24,15 @@ export class RestProvider implements GatinhoSenderProvider {
       }).then((response) => response.json());
 
       if (result.error) {
-        return false;
+        return { data: undefined, error: result.error };
       }
 
-      return true;
-    } catch {
-      return false;
+      return { data: true };
+    } catch (e) {
+      let error: Error = new Error("Erro ao salvar imagem");
+      if (e instanceof Error) error = e;
+
+      return { data: undefined, error };
     }
   }
 }

@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache, gql, from } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
-import { GatinhoSenderProvider } from "../protocols";
+import { Provider } from "../protocols";
 
 const UPLOAD_MUTATION = gql`
   mutation ($singleUploadFile: Upload!, $nsfw: Boolean!) {
@@ -14,7 +14,7 @@ const SAVE_URL_MUTATION = gql`
   }
 `;
 
-export class GraphqlProvider implements GatinhoSenderProvider {
+export class GraphqlProvider implements Provider {
   private client: ApolloClient<any>;
 
   constructor() {
@@ -28,7 +28,7 @@ export class GraphqlProvider implements GatinhoSenderProvider {
     });
   }
 
-  async save({ file, url, nsfw }: GatinhoSenderProvider.Params) {
+  async save({ file, url, nsfw }: Provider.Params) {
     const saveFile = async () =>
       await this.client.mutate({
         mutation: UPLOAD_MUTATION,
@@ -49,14 +49,17 @@ export class GraphqlProvider implements GatinhoSenderProvider {
 
     try {
       if (file) {
-        await saveFile();
-      } else {
-        await saveUrl();
+        const { data, errors } = await saveFile();
+        return { data, error: new Error(errors?.[0].message) };
       }
 
-      return true;
-    } catch (error) {
-      return false;
+      const { data, errors } = await saveUrl();
+      return { data, error: new Error(errors?.[0].message) };
+    } catch (e) {
+      let error: Error = new Error("Erro ao salvar imagem");
+      if (e instanceof Error) error = e;
+
+      return { data: undefined, error };
     }
   }
 }

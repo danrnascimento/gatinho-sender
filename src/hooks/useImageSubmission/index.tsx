@@ -1,10 +1,10 @@
-import { GatinhoSenderController } from "../../controllers";
+import { Controller } from "../../controllers";
 import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
 
 export type SubmissionParams = SendImageUsingFile.Params &
   SendImageUsingUrl.Params;
 
-export type UseImageSubmission = (controller: GatinhoSenderController) => {
+export type UseImageSubmission = (controller: Controller) => {
   handleSubmit: (params: SubmissionParams) => Promise<void>;
 };
 

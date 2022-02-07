@@ -1,7 +1,6 @@
 import React from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GatinhoSenderController } from "./controllers";
 import {
   GatinhoSenderFormOne,
   GatinhoSenderFormThree,
@@ -13,9 +12,10 @@ import {
 } from "./presentation/components";
 import { GatinhoSenderFormProps } from "./presentation/components/GatinhoSenderForm/types";
 import useImageSubmission from "./hooks/useImageSubmission";
+import { Controller } from "./protocols";
 
 type AppProps = {
-  controller: GatinhoSenderController;
+  controller: Controller;
 };
 
 const PagesWrapper = ({

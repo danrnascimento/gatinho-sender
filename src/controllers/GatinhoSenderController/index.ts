@@ -1,11 +1,9 @@
 import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
-import { GatinhoSenderProvider, Validator } from "../../protocols";
+import { Controller, Provider, Validator } from "../../protocols";
 
-export class GatinhoSenderController
-  implements SendImageUsingFile, SendImageUsingUrl
-{
+export class GatinhoSenderController implements Controller {
   constructor(
-    private provider: GatinhoSenderProvider,
+    private provider: Provider,
     private imageValidation: Validator<File>,
     private urlValidator: Validator<string>
   ) {}
@@ -16,18 +14,16 @@ export class GatinhoSenderController
     valueToCheck,
   }: {
     validator: Validator<Value>["validate"];
-    onSuccess: () => GatinhoSenderProvider.Result;
+    onSuccess: () => Provider.Result;
     valueToCheck?: Value;
   }) {
     try {
-      if (!valueToCheck) return false;
+      const { valid, reason } = validator(valueToCheck);
+      if (!valid) return { error: reason };
 
-      const valueIsValid = validator(valueToCheck);
-      if (!valueIsValid) return false;
-
-      return onSuccess();
+      return await onSuccess();
     } catch {
-      return false;
+      return { error: new Error("Erro ao enviar imagem") };
     }
   }
 

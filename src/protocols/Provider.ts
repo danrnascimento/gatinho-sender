@@ -1,10 +1,14 @@
-import { SendImageUsingFile, SendImageUsingUrl } from "../useCases";
+import {
+  SendImageUsingFile,
+  SendImageUsingUrl,
+  DefaultSendImage,
+} from "../useCases";
 
-export interface GatinhoSenderProvider {
-  save: (data: GatinhoSenderProvider.Params) => GatinhoSenderProvider.Result;
+export interface Provider {
+  save: (data: Provider.Params) => Provider.Result;
 }
 
-export namespace GatinhoSenderProvider {
+export namespace Provider {
   export type Params = SendImageUsingFile.Params & SendImageUsingUrl.Params;
-  export type Result = Promise<boolean>;
+  export type Result = DefaultSendImage.Result;
 }

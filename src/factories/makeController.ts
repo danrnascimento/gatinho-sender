@@ -15,7 +15,9 @@ export enum ControllerType {
   LOCAL_STORAGE = "ls",
 }
 
-export const makeController = (controllerType: ControllerType) => {
+export const makeController = (
+  controllerType: ControllerType
+): GatinhoSenderController => {
   const provider = {
     [ControllerType.GRAPHQL]: new GraphqlProvider(),
     [ControllerType.REST]: new RestProvider(),
