@@ -11,7 +11,7 @@ import {
   GatinhoSenderFormPickerWithNavigate,
 } from "./presentation/components";
 import { GatinhoSenderFormProps } from "./presentation/components/GatinhoSenderForm/types";
-import useImageSubmission from "./hooks/useImageSubmission";
+import { useImageSubmission } from "./presentation/adapters";
 import { Controller } from "./protocols";
 
 type AppProps = {

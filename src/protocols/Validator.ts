@@ -3,5 +3,5 @@ export interface Validator<T extends any> {
 }
 
 export namespace Validator {
-  export type Result = { valid: boolean; reason?: Error };
+  export type Result = { valid: boolean; reason?: string };
 }

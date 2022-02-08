@@ -1,5 +1,5 @@
-import { Controller } from "../../controllers";
-import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
+import { Controller } from "@app/protocols";
+import { SendImageUsingFile, SendImageUsingUrl } from "@app/useCases";
 
 export type SubmissionParams = SendImageUsingFile.Params &
   SendImageUsingUrl.Params;
@@ -8,7 +8,7 @@ export type UseImageSubmission = (controller: Controller) => {
   handleSubmit: (params: SubmissionParams) => Promise<void>;
 };
 
-const useImageSubmission: UseImageSubmission = (controller) => {
+export const useImageSubmission: UseImageSubmission = (controller) => {
   const handleSubmit = async ({ file, nsfw, url }: SubmissionParams) => {
     if (!file && !url) {
       return alert("é necessário adicionar um arquivo ou uma url");
@@ -29,5 +29,3 @@ const useImageSubmission: UseImageSubmission = (controller) => {
 
   return { handleSubmit };
 };
-
-export default useImageSubmission;

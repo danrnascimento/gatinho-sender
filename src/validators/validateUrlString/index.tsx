@@ -1,4 +1,4 @@
-import { Validator } from "../../protocols";
+import { Validator } from "@app/protocols";
 
 export class ValidateUrlString implements Validator<string> {
   private pattern = new RegExp(

@@ -24,7 +24,7 @@ export class RestProvider implements Provider {
       }).then((response) => response.json());
 
       if (result.error) {
-        return { data: undefined, error: result.error };
+        return { error: new Error(result.error) };
       }
 
       return { data: true };
@@ -32,7 +32,7 @@ export class RestProvider implements Provider {
       let error: Error = new Error("Erro ao salvar imagem");
       if (e instanceof Error) error = e;
 
-      return { data: undefined, error };
+      return { error };
     }
   }
 }
