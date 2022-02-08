@@ -1,11 +1,11 @@
-export interface DefaultSendImage<
-  Params = DefaultSendImage.Params,
-  Result = DefaultSendImage.Result
+export interface SendImage<
+  Params = SendImage.Params,
+  Result = SendImage.Result
 > {
   (data: Params): Result;
 }
 
-export namespace DefaultSendImage {
+export namespace SendImage {
   export type Params = { nsfw: boolean };
-  export type Result = Promise<{ data?: Boolean | Object; error?: Error }>;
+  export type Result = { data?: Boolean | Object; error?: Error };
 }

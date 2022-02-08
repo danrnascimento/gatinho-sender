@@ -1,6 +1,11 @@
 import { SendImageUsingFile, SendImageUsingUrl } from "../../useCases";
 import { Controller, Provider, Validator } from "../../protocols";
 
+type CreateSendImage = (params: {
+  validation: Validator.Result;
+  onAfterValid: () => Promise<Provider.Result>;
+}) => Promise<Provider.Result>;
+
 export class GatinhoSenderController implements Controller {
   constructor(
     private provider: Provider,
@@ -8,38 +13,31 @@ export class GatinhoSenderController implements Controller {
     private urlValidator: Validator<string>
   ) {}
 
-  private async sendImageWrappper<Value = string | File>({
-    validator,
-    onSuccess,
-    valueToCheck,
-  }: {
-    validator: Validator<Value>["validate"];
-    onSuccess: () => Provider.Result;
-    valueToCheck?: Value;
-  }) {
+  private createSendImage: CreateSendImage = async ({
+    validation,
+    onAfterValid,
+  }) => {
     try {
-      const { valid, reason } = validator(valueToCheck);
-      if (!valid) return { error: reason };
+      const { valid, reason } = validation;
+      if (!valid) return { error: new Error(reason) };
 
-      return await onSuccess();
+      return await onAfterValid();
     } catch {
       return { error: new Error("Erro ao enviar imagem") };
     }
-  }
+  };
 
   public async sendImageUsingFile({ file, nsfw }: SendImageUsingFile.Params) {
-    return this.sendImageWrappper({
-      valueToCheck: file,
-      validator: this.imageValidation.validate,
-      onSuccess: () => this.provider.save({ file, nsfw }),
+    return this.createSendImage({
+      validation: this.imageValidation.validate(file),
+      onAfterValid: () => this.provider.save({ file, nsfw }),
     });
   }
 
   public async sendImageUsingUrl({ url, nsfw }: SendImageUsingUrl.Params) {
-    return this.sendImageWrappper({
-      valueToCheck: url,
-      validator: this.urlValidator.validate,
-      onSuccess: () => this.provider.save({ url, nsfw }),
+    return this.createSendImage({
+      validation: this.urlValidator.validate(url),
+      onAfterValid: () => this.provider.save({ url, nsfw }),
     });
   }
 }

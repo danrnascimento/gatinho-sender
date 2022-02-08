@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { GatinhoSenderController } from "../../controllers";
-import useImageSubmission from "./index";
+import { GatinhoSenderController } from "../../../../controllers";
+import { useImageSubmission } from "./index";
 
 describe("Hook: useImageSubmission", () => {
   const mockedController = (
